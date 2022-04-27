@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>741</width>
+    <height>381</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MySuni 자동실행기</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pb_startMySuni">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>144</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>MySuni 시작</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>720</y>
+      <width>361</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cb_autodocument">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>214</y>
+      <width>131</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Document 자동재생</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cb_autosurvey">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>240</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Survey 자동완성</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>274</y>
+      <width>56</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>재생속도</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="dsb_videospeed">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>268</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>2.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.250000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.500000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>304</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>최대수강시간</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="sb_hourlimit">
+    <property name="geometry">
+     <rect>
+      <x>101</x>
+      <y>300</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>8</number>
+    </property>
+    <property name="value">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>16</y>
+      <width>210</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>39</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PW</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>14</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_id">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>11</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_pw">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>37</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>자동실행 대상지정</string>
+    </property>
+    <widget class="QRadioButton" name="rb_badge">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>90</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Badge</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rb_card">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>90</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Card</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTextBrowser" name="tb_log">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>9</y>
+      <width>571</width>
+      <height>331</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>741</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>설정</string>
+    </property>
+    <addaction name="m_Survey"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="m_Survey">
+   <property name="text">
+    <string>강의평가 미리입력</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
