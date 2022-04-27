@@ -241,7 +241,7 @@ class MySuniWorker(QThread):
         time.sleep(5)
         driver.execute_script('alert(\'MySuni 자동실행기: 지원하지 않는 강의유형입니다. 직접 강의를 수강해주세요. 수강이 완료되면 자동으로 다음 강의로 넘어갑니다.\')')
         while driver.execute_script('return document.querySelector(\'.btn-state-course.act-on\').querySelectorAll(\'.complete\').length > 0'):
-            time.sleep(10)
+            time.sleep(5)
         time.sleep(3)
 
     # Card 진행 - 비디오 페이지
@@ -285,7 +285,7 @@ class MySuniWorker(QThread):
         driver.execute_script('window.scrollTo(0, 150)')
         while len(driver.find_elements(By.CSS_SELECTOR, "span.fp-remaining")) == 0 \
                 or driver.find_element(By.CSS_SELECTOR, "span.fp-remaining").get_attribute("innerHTML") != '00:00':
-            time.sleep(10)
+            time.sleep(5)
         time.sleep(5)
         # driver.switch_to.default_content()
 
