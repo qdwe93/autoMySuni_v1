@@ -225,7 +225,8 @@ class MySuniWorker(QThread):
                         self.run_video(driver, url_str)
                     elif 'Documents' in url_str:
                         self.run_documents(driver, url_str)
-                    elif 'survey' in url_str:
+                        # 강의 평가 이외의 Survey는 자동실행 대상에서 제외한다.
+                    elif 'survey' in url_str and 'survey/' not in url_str:
                         self.run_survey(driver, url_str)
                     else:
                         self.run_selfStudy(driver, url_str)
@@ -239,8 +240,8 @@ class MySuniWorker(QThread):
         time.sleep(3)
         driver.get(p_page_url)
         time.sleep(5)
-        driver.execute_script('alert(\'MySuni 자동실행기: 지원하지 않는 강의유형입니다. 직접 강의를 수강해주세요. 수강이 완료되면 자동으로 다음 강의로 넘어갑니다.\')')
-        while driver.execute_script('return document.querySelector(\'.btn-state-course.act-on\').querySelectorAll(\'.complete\').length > 0'):
+        logging.info('MySuni 자동실행기: 지원하지 않는 강의유형입니다. 직접 강의를 수강해주세요. 수강이 완료되면 자동으로 다음 강의로 넘어갑니다.')
+        while driver.execute_script('return document.querySelector(\'.btn-state-course.act-on\').querySelectorAll(\'.complete\').length == 0'):
             time.sleep(5)
         time.sleep(3)
 
