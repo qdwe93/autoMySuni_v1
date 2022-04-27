@@ -15,7 +15,6 @@ import mysuniWorker
 import mysuniQTPopup
 
 mysuni_ui_class = uic.loadUiType("qt_view_v2_src.ui")[0]
-mysuni_popup_class = uic.loadUiType("qt_view_popup.ui")[0]
 
 logging.basicConfig(
   format  = '%(asctime)s:%(levelname)s:%(message)s',
@@ -108,8 +107,11 @@ class MysuniRunnerWindow(QMainWindow, mysuni_ui_class):
             self.sb_hourlimit.setValue(int(self.suni_options['maxhour']))
             self.grade = self.suni_options['grade']
             self.reviewText = self.suni_options['reviewText']
+            print('세팅이 정상적으로 로드되었습니다.')
 
         except BaseException as e:
+            print('최초실행 - 설정파일이 없습니다.')
+            print('한번 실행한 후 부터는 세팅이 자동으로 저장됩니다.')
             print(e)
 
     # id, pw, card/badge, autodoc, autosurvey, videospeed, maxhour
