@@ -222,11 +222,19 @@ class MySuniWorker(QThread):
                     driver.switch_to.window(self.handle_of_the_window)
                 if time.perf_counter() < p_maxhour * 60 * 60:
                     if 'Video' in url_str:
-                        self.run_video(driver, url_str)
-                    elif 'Documents' in url_str:
-                        self.run_documents(driver, url_str)
+                        try:
+                            self.run_video(driver, url_str)
+                        except BaseException as e:
+                            logging.warning(e)
+                            self._check_finish()
+                    elif self.cb_autodocument.isChecked() and 'Documents' in url_str:
+                        try:
+                            self.run_documents(driver, url_str)
+                        except BaseException as e:
+                            logging.warning(e)
+                            self._check_finish()
                         # 강의 평가 이외의 Survey는 자동실행 대상에서 제외한다.
-                    elif 'survey' in url_str and 'survey/' not in url_str:
+                    elif self.cb_autosurvey.isChecked() and 'survey' in url_str and 'survey/' not in url_str:
                         self.run_survey(driver, url_str)
                     else:
                         self.run_selfStudy(driver, url_str)
@@ -240,10 +248,7 @@ class MySuniWorker(QThread):
         time.sleep(3)
         driver.get(p_page_url)
         time.sleep(5)
-        logging.info('MySuni 자동실행기: 지원하지 않는 강의유형입니다. 직접 강의를 수강해주세요. 수강이 완료되면 자동으로 다음 강의로 넘어갑니다.')
-        while driver.execute_script('return document.querySelector(\'.btn-state-course.act-on\').querySelectorAll(\'.complete\').length == 0'):
-            time.sleep(5)
-        time.sleep(3)
+        self._check_finish()
 
     # Card 진행 - 비디오 페이지
     def run_video(self, driver, p_page_url):
@@ -252,6 +257,9 @@ class MySuniWorker(QThread):
         time.sleep(3)
         driver.get(p_page_url)
         time.sleep(5)
+
+        # 만약 팝업창이 뜰 경우 자동 클릭
+        self._check_popup()
 
         # 비디오 플레이어 작동을 위한 ActionChains 객체 생성
         action = ActionChains(driver)
@@ -300,10 +308,7 @@ class MySuniWorker(QThread):
         document_completed = False
 
         # 만약 팝업창이 뜰 경우 자동 클릭
-        driver.execute_script("""
-            if (document.querySelectorAll('.modal.visible button').length == 1) document.querySelector('.modal.visible button').click()
-                """)
-        time.sleep(1)
+        self._check_popup()
 
         while not document_completed:
             driver.find_element(By.CSS_SELECTOR, "div.pdf-control > div.pagination > a.pdf-next").click()
@@ -330,6 +335,20 @@ class MySuniWorker(QThread):
         time.sleep(1)
 
         driver.find_element(By.CSS_SELECTOR, "div.actions.normal.twin > button").click()
+
+    def _check_popup(self):
+        # 만약 팝업창이 뜰 경우 자동으로 닫는다.
+        self.driver.execute_script("""
+            if (document.querySelectorAll('.modal.visible button').length == 1) document.querySelector('.modal.visible button').click()
+                """)
+        time.sleep(1)
+
+    def _check_finish(self):
+        logging.info('MySuni 자동실행기: 지원하지 않는 강의유형입니다. 직접 강의를 수강해주세요. 수강이 완료되면 자동으로 다음 강의로 넘어갑니다.')
+        while self.driver.execute_script('return document.querySelector(\'.btn-state-course.act-on\').querySelectorAll(\'.complete\').length == 0'):
+            time.sleep(5)
+        time.sleep(3)
+
 
 
     # 사용자에게 알리기 위한 헤더 추가
