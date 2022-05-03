@@ -45,6 +45,7 @@ class MySuniWorker(QThread):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
         driver = webdriver.Chrome(service=Service(executable_path=ChromeDriverManager().install()), options=options)
+        self.driver = driver
         driver.implicitly_wait(10)
 
         # 프로그램 시작
