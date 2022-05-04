@@ -228,14 +228,14 @@ class MySuniWorker(QThread):
                         except BaseException as e:
                             logging.warning(e)
                             self._check_finish()
-                    elif self.cb_autodocument.isChecked() and 'Documents' in url_str:
+                    elif self.parent.cb_autodocument.isChecked() and 'Documents' in url_str:
                         try:
                             self.run_documents(driver, url_str)
                         except BaseException as e:
                             logging.warning(e)
                             self._check_finish()
                         # 강의 평가 이외의 Survey는 자동실행 대상에서 제외한다.
-                    elif self.cb_autosurvey.isChecked() and 'survey' in url_str and 'survey/' not in url_str:
+                    elif self.parent.cb_autosurvey.isChecked() and 'survey' in url_str and 'survey/' not in url_str:
                         self.run_survey(driver, url_str)
                     else:
                         self.run_selfStudy(driver, url_str)
@@ -327,9 +327,12 @@ class MySuniWorker(QThread):
         time.sleep(3)
         grade = self.parent.grade
         reviewText = self.parent.reviewText
-        gradeRadios = driver.find_elements(By.CSS_SELECTOR, "div.ui.radio.checkbox.iconRadio.radio0" + grade + " > label")
-        for gradeRadio in gradeRadios:
-            gradeRadio.click()
+
+        # 평점을 체크한다.
+        grade
+        self.driver.execute_script("document.querySelectorAll('div.ui.radio.checkbox.iconRadio > input[value="
+                                   + grade + "]').forEach(function (el) {el.click();});")
+        # 평가기록을 남긴다.
         driver.find_element(By.CSS_SELECTOR, "div.rev-edit > div.edit-wrapper > textarea").send_keys(reviewText)
         driver.find_element(By.CSS_SELECTOR, "div.survey-preview > button.ui.button.fix.bg").click()
 
