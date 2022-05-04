@@ -1,5 +1,7 @@
 Welcome to the autoMySuni_v1 wiki!
 
+최종 수정일: 2022-05-05
+
 아래의 링크를 클릭하여 프로그램을 다운로드 받으세요.
 
 https://github.com/qdwe93/autoMySuni_v1/raw/master/dist/mysuniQTUI.zip
