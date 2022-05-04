@@ -24,3 +24,6 @@ MySuni 시작 버튼을 누르면 입력한 아이디/비밀번호로 자동 로
 Card 실행을 선택한 경우 https://mysuni.sk.com/suni-main/lecture/card/CARD-xxxx/view 와 같이 view로 끝나는 강의의 첫화면이 나오면 자동으로 재생이 시작됩니다. 꼭 필요한 경우가 아니면 일단 강의를 들어간 다음에는 아무것도 누르지 마세요!</br>
 메뉴에서 강의평가를 수정할 수 있습니다. 강의 종료후 Survey에 자동저장됩니다.</br>
 
+
+Comment:
+원래 크롬확장프로그램으로 만들었지만 manifest v3 이후 디버깅이 아니면 동영상 자동재생이 불가하여 Selenium 으로 작성하였음.
