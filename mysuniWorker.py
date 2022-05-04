@@ -329,9 +329,10 @@ class MySuniWorker(QThread):
         reviewText = self.parent.reviewText
 
         # 평점을 체크한다.
-        grade
-        self.driver.execute_script("document.querySelectorAll('div.ui.radio.checkbox.iconRadio > input[value="
-                                   + grade + "]').forEach(function (el) {el.click();});")
+        self.driver.execute_script(f"""
+            document.querySelectorAll('div.ui.radio.checkbox.iconRadio > input[value="{grade}"]').forEach(
+            function (el) {{el.click();}});
+        """)
         # 평가기록을 남긴다.
         driver.find_element(By.CSS_SELECTOR, "div.rev-edit > div.edit-wrapper > textarea").send_keys(reviewText)
         driver.find_element(By.CSS_SELECTOR, "div.survey-preview > button.ui.button.fix.bg").click()
